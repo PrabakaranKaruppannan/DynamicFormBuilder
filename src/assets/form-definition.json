@@ -1,0 +1,69 @@
+[
+    {
+        "fieldtype": "text",
+        "group": "General Information",
+        "name": "Order No",
+        "validator": [
+            "required"
+        ]
+    },
+    {
+        "fieldtype": "date",
+        "group": "General Information",
+        "name": "OrderedDate",
+        "validator": [
+            "required"
+        ]
+    },
+    {
+        "condition": "and",
+        "fieldtype": "text",
+        "group": "General Information",
+        "name": "OrderedInfo",
+        "rules": [
+            {
+                "field": "OrderedDate",
+                "operator": "!=",
+                "value": ""
+            }
+        ],
+        "validator": [
+            "required"
+        ]
+    },
+    {
+        "fieldtype": "integer",
+        "group": "Product Information",
+        "name": "Price",
+        "validator": [
+            "required"
+        ]
+    },
+    {
+        "fieldtype": "boolean",
+        "group": "Product Information",
+        "name": "Refurbished",
+        "selectList": [
+            "Yes",
+            "No"
+        ]
+    },
+    {
+        "condition": "or",
+        "fieldtype": "text",
+        "group": "Product Information",
+        "name": "Address",
+        "rules": [
+            {
+                "field": "Order No",
+                "operator": ">=",
+                "value": "100"
+            },
+            {
+                "field": "Price",
+                "operator": "<=",
+                "value": "100"
+            }
+        ]
+    }
+]

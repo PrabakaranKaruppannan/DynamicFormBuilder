@@ -1,0 +1,36 @@
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let field of formDefinition">
+      <div *ngIf="isFieldVisible(field)" class="field">
+        <label class="fieldLabel" [for]="field.name">
+          {{ field.name }} :
+        </label>
+        
+        <!-- Text Field -->
+        <input class="fieldValue" *ngIf="field.fieldtype === 'text'" [formControlName]="field.name" type="text" [id]="field.name" />
+  
+        <!-- Date Field -->
+        <input class="fieldValue" *ngIf="field.fieldtype === 'date'" [formControlName]="field.name" type="date" [id]="field.name" />
+  
+        <!-- Integer Field -->
+        <input class="fieldValue" *ngIf="field.fieldtype === 'integer'" [formControlName]="field.name" type="number" [id]="field.name" />
+  
+        <!-- Boolean Field -->
+        <select class="fieldValue" *ngIf="field.fieldtype === 'boolean'" [formControlName]="field.name" [id]="field.name">
+          <option *ngFor="let option of field.selectList" [value]="option">{{ option }}</option>
+        </select>
+        
+        <span class="fieldValue" *ngIf="field.validator && field.validator.includes('required')" class="text-danger">*</span>
+
+        <!-- Validation message for required fields -->
+        <div class="fieldValue" *ngIf="form.get(field.name)?.errors?.['required'] && (form.get(field.name)?.touched || form.get(field.name)?.dirty)" class="error-message text-danger">
+          {{ field.name }} is required.
+        </div>
+      </div>
+    </ng-container>
+    <button type="submit">Submit</button>
+</form>
+
+<div class="submittedData" *ngIf="submittedData">
+	<h3>Submitted Form Data:</h3>
+	<pre>{{ submittedData | json }}</pre>
+</div>

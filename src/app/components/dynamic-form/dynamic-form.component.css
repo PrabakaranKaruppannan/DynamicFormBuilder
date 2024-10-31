@@ -1,0 +1,22 @@
+.text-danger {
+    color: red;
+    padding-left: 5px;
+}
+
+.field {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1.5rem;
+}
+
+.fieldLabel {
+    width: 20%;
+}
+
+.fieldValue {
+    width: 40%;
+}
+
+.submittedData {
+    margin-top: 3rem;
+}
